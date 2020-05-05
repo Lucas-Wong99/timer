@@ -7,4 +7,4 @@ for (let i = 1; i <= maxNum; i++) {
       process.stdout.write('\x07');
     }
   },i * 1000);
-} 
+}
