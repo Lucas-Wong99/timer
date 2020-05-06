@@ -1,28 +1,20 @@
-const readline = require('readline');
+const stdin = process.stdin
+const stdout = process.stdout
 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
+stdin.setEncoding('utf8')
+stdin.setRawMode(true)
 
-rl.question('How long would you like your timer to be?', (answer) => {
-  // TODO: Log the answer in a database
-  if (answer === 'b') {
-    process.stdout.write('\x07');
+stdin.on('data', (data) => {
+  if (data === 'b') {
+    stdout.write('\x07');
   }
-  if (!isNaN(answer)) {
-    const time = parseInt(answer);
-    if (answer >= 1 && answer <= 9) {
-      setTimeout(() => {
-        process.stdout.write('\x07');
-      },time * 1000);
-    } else {
-      console.log('Answer must between 1 and 9');
-    }
-  } else {
-    console.log('Input must be a number');
+  if (data >= 1 && data <= 9) {
+    setTimeout(() => {
+      process.stdout.write('\x07');
+    },data * 1000);
+  } 
+  if (data === '\u0003') {
+    console.log('See you next time ciao!!!!')
+    process.exit()
   }
-  
-
-  rl.close();
-});
+})
